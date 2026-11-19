@@ -150,6 +150,71 @@ a {
     color: var(--text);
 }
 
+/* ===== Plant detail ===== */
+.plant-detail {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: start;
+    margin-bottom: 72px;
+}
+
+.detail-image {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--surface);
+}
+
+.detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.detail-info h1 {
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.detail-category {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin: 6px 0 20px;
+}
+
+.detail-about {
+    color: var(--muted);
+    margin-bottom: 24px;
+}
+
+.detail-row {
+    margin-bottom: 18px;
+}
+
+.detail-row h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+}
+
+.edible-yes {
+    color: var(--green);
+    font-weight: 600;
+}
+
+.edible-no {
+    color: #b91c1c;
+    font-weight: 600;
+}
+
+/* ===== Related plants ===== */
+.related h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     .navbar-inner {
@@ -179,6 +244,11 @@ a {
 
     .plants-grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    .plant-detail {
+        grid-template-columns: 1fr;
+        gap: 28px;
     }
 }
 

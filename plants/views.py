@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
 from .models import Plant
 
@@ -50,4 +50,18 @@ def all_plants_view(request: HttpRequest):
         "categories": Plant.Category.choices,
         "category": category,
         "edible": edible,
+    })
+
+def plant_detail_view(request: HttpRequest, plant_id: int):
+    plant = get_object_or_404(Plant, pk=plant_id)
+
+    related_plants = (
+        Plant.objects.filter(category=plant.category)
+        .exclude(pk=plant.pk)
+        .order_by("-created_at")[:3]
+    )
+
+    return render(request, "plants/plant_detail.html", {
+        "plant": plant,
+        "related_plants": related_plants,
     })

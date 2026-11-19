@@ -1,4 +1,4 @@
-<a href="#" class="plant-card">
+<a href="{% url 'plants:plant_detail_view' plant.id %}" class="plant-card">
     <div class="plant-card-img">
         <img src="{{ plant.image.url }}" alt="{{ plant.name }}">
     </div>

@@ -1,0 +1,42 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ plant.name }} | Planteer{% endblock %}
+
+{% block content %}
+    <section class="plant-detail">
+        <div class="detail-image">
+            <img src="{{ plant.image.url }}" alt="{{ plant.name }}">
+        </div>
+
+        <div class="detail-info">
+            <h1>{{ plant.name }}</h1>
+            <p class="detail-category">{{ plant.get_category_display }}</p>
+
+            <p class="detail-about">{{ plant.about|linebreaksbr }}</p>
+
+            <div class="detail-row">
+                <h4>Is Edible</h4>
+                <p class="{% if plant.is_edible %}edible-yes{% else %}edible-no{% endif %}">
+                    {{ plant.is_edible|yesno:"Yes ✅,No ❌" }}
+                </p>
+            </div>
+
+            <div class="detail-row">
+                <h4>Used For</h4>
+                <p>{{ plant.used_for|linebreaksbr }}</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="related">
+        <h2>Related Plants</h2>
+
+        <div class="plants-grid">
+            {% for plant in related_plants %}
+                {% include "plants/partials/plant_card.html" %}
+            {% empty %}
+                <p class="empty">No other {{ plant.get_category_display|lower }} plants yet 🌱</p>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
