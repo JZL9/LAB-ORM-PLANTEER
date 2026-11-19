@@ -65,3 +65,17 @@ def plant_detail_view(request: HttpRequest, plant_id: int):
         "plant": plant,
         "related_plants": related_plants,
     })
+
+def search_view(request: HttpRequest):
+    query = request.GET.get("q", "").strip()
+
+    if query:
+        plants = Plant.objects.filter(name__icontains=query).order_by("name")
+    else:
+        plants = Plant.objects.none()
+
+    return render(request, "plants/search.html", {
+        "plants": plants,
+        "query": query,
+        "total": plants.count(),
+    })
