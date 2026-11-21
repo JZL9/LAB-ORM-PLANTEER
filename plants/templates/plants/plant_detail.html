@@ -25,6 +25,24 @@
                 <h4>Used For</h4>
                 <p>{{ plant.used_for|linebreaksbr }}</p>
             </div>
+            <div class="detail-actions">
+                <a href="{% url 'plants:update_plant_view' plant.id %}" class="btn btn-outline">✏️ Edit</a>
+                <button type="button" class="btn btn-danger"
+                        onclick="document.getElementById('delete-dialog').showModal()">🗑️ Delete</button>
+            </div>
+
+            <dialog id="delete-dialog" class="confirm-dialog">
+                <h3>Delete this plant?</h3>
+                <p>"{{ plant.name }}" will be deleted permanently.</p>
+                <div class="dialog-actions">
+                    <button type="button" class="btn btn-outline" onclick="this.closest('dialog').close()">Cancel</button>
+                    <form method="POST" action="{% url 'plants:delete_plant_view' plant.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Yes, delete</button>
+                    </form>
+                </div>
+            </dialog>
+
         </div>
     </section>
 

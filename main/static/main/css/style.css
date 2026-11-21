@@ -316,6 +316,86 @@ a {
     color: var(--green);
 }
 
+/* ===== Button variants ===== */
+.btn-outline {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-outline:hover {
+    background: var(--surface);
+    opacity: 1;
+}
+
+.btn-danger {
+    background: #dc2626;
+    color: #fff;
+}
+
+/* ===== Detail actions ===== */
+.detail-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 28px;
+}
+
+/* ===== Update form ===== */
+.current-image p {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.current-image img {
+    width: 160px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.form-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.form-actions .btn {
+    flex: 1;
+    text-align: center;
+    padding: 13px;
+}
+
+/* ===== Confirm dialog ===== */
+.confirm-dialog {
+    margin: auto;
+    width: 90%;
+    max-width: 420px;
+    padding: 28px;
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+.confirm-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.confirm-dialog h3 {
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+}
+
+.confirm-dialog p {
+    color: var(--muted);
+    margin-bottom: 24px;
+}
+
+.dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
     .navbar-inner {

@@ -79,3 +79,35 @@ def search_view(request: HttpRequest):
         "query": query,
         "total": plants.count(),
     })
+
+def update_plant_view(request: HttpRequest, plant_id: int):
+    plant = get_object_or_404(Plant, pk=plant_id)
+
+    if request.method == "POST":
+        category = request.POST.get("category", "")
+        if category in Plant.Category.values:
+            plant.category = category
+
+        plant.name = request.POST["name"].strip()
+        plant.about = request.POST["about"].strip()
+        plant.used_for = request.POST["used_for"].strip()
+        plant.is_edible = "is_edible" in request.POST
+        if "image" in request.FILES:
+            plant.image = request.FILES["image"]
+        plant.save()
+        return redirect("plants:plant_detail_view", plant_id=plant.id)
+
+    return render(request, "plants/update_plant.html", {
+        "plant": plant,
+        "categories": Plant.Category.choices,
+    })
+
+
+def delete_plant_view(request: HttpRequest, plant_id: int):
+    plant = get_object_or_404(Plant, pk=plant_id)
+
+    if request.method == "POST":
+        plant.delete()
+        return redirect("plants:all_plants_view")
+
+    return redirect("plants:plant_detail_view", plant_id=plant.id)
