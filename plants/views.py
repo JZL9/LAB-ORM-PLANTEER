@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpRequest
-from .models import Plant
+from .models import Plant, Comment
 
 
 def add_plant_view(request: HttpRequest):
@@ -60,10 +60,12 @@ def plant_detail_view(request: HttpRequest, plant_id: int):
         .exclude(pk=plant.pk)
         .order_by("-created_at")[:3]
     )
+    comments = plant.comments.order_by("-created_at")
 
     return render(request, "plants/plant_detail.html", {
         "plant": plant,
         "related_plants": related_plants,
+        "comments": comments,
     })
 
 def search_view(request: HttpRequest):
@@ -109,5 +111,17 @@ def delete_plant_view(request: HttpRequest, plant_id: int):
     if request.method == "POST":
         plant.delete()
         return redirect("plants:all_plants_view")
+
+    return redirect("plants:plant_detail_view", plant_id=plant.id)
+
+def add_comment_view(request: HttpRequest, plant_id: int):
+    plant = get_object_or_404(Plant, pk=plant_id)
+
+    if request.method == "POST":
+        full_name = request.POST.get("full_name", "").strip()
+        content = request.POST.get("content", "").strip()
+
+        if full_name and content:
+            plant.comments.create(full_name=full_name, content=content)
 
     return redirect("plants:plant_detail_view", plant_id=plant.id)

@@ -18,12 +18,11 @@
 
             <nav class="nav-links">
                 <a href="{% url 'plants:all_plants_view' %}">All Plants</a>
-                <a href="#">Contact Us</a>
+                <a href="{% url 'contact:contact_view' %}">Contact Us</a>                
                 <a href="{% url 'plants:add_plant_view' %}" class="btn">Add Plant</a>
             </nav>
         </div>
     </header>
-
     <main class="container page">
         {% block content %}{% endblock %}
     </main>
@@ -57,8 +56,8 @@
 
             <div class="footer-col">
                 <h4>About</h4>
-                <a href="#">Contact Us</a>
-                <a href="#">Messages</a>
+                <a href="{% url 'contact:contact_view' %}">Contact Us</a>
+                <a href="{% url 'contact:messages_view' %}">Messages</a>
             </div>
         </div>
     </footer>
